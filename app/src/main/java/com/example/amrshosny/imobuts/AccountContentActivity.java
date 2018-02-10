@@ -26,8 +26,8 @@ public class AccountContentActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.ticket);
-        tabLayout.getTabAt(1).setIcon(R.drawable.profile);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ticket_tab);
+        tabLayout.getTabAt(1).setIcon(R.drawable.profile_tab);
 
     }
 }
