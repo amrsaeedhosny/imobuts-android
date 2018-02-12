@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.microedition.khronos.egl.EGLDisplay;
@@ -33,10 +34,10 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 boolean validNewAccount = true;
-                validNewAccount = validateUsername();
-                validNewAccount = validateEmail();
-                validNewAccount = validatePassword();
-                validNewAccount = validateRetypePassword();
+                validNewAccount = isUsernameValid();
+                validNewAccount = isEmailValid();
+                validNewAccount = isPasswordValid();
+                validNewAccount = isRetypePasswordValid();
                 if(validNewAccount){
 
                 }
@@ -45,15 +46,21 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     }
 
-    boolean validateUsername(){
+    boolean isUsernameValid(){
         String usernameText = String.valueOf(username.getText());
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]+$");
+        Matcher matcher = pattern.matcher(usernameText);
 
         if(usernameText.length() == 0) {
             username.setError("Username is required");
             return false;
         }
-        else if(!Pattern.matches("[a-zA-Z0-9]", usernameText)){
-            username.setError("lol");
+        else if(!matcher.matches()){
+            username.setError("Letters and digits only are allowed");
+            return false;
+        }
+        else if(usernameText.length() < 6){
+            username.setError("Username must be greater than 6 characters");
             return false;
         }
         else {
@@ -62,11 +69,16 @@ public class CreateAccountActivity extends AppCompatActivity {
         return true;
     }
 
-    boolean validateEmail(){
+    boolean isEmailValid(){
         String emailText = String.valueOf(email.getText());
+        Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,4}$");
+        Matcher matcher = pattern.matcher(emailText);
         if(email.length() == 0) {
             email.setError("Email is required");
             return false;
+        }
+        else if(!matcher.matches()){
+            email.setError("Email format is incorrect");
         }
         else {
             email.setError(null);
@@ -74,11 +86,15 @@ public class CreateAccountActivity extends AppCompatActivity {
         return true;
     }
 
-    boolean validatePassword(){
+    boolean isPasswordValid(){
         String passwordText = String.valueOf(password.getText());
 
         if(passwordText.length() == 0) {
             password.setError("Password is required");
+            return false;
+        }
+        else if(passwordText.length() < 6){
+            password.setError("Password must be greater than 6 characters");
             return false;
         }
         else {
@@ -88,12 +104,16 @@ public class CreateAccountActivity extends AppCompatActivity {
         return true;
     }
 
-    boolean validateRetypePassword(){
+    boolean isRetypePasswordValid(){
         String retypePasswordText = String.valueOf(retypePassword.getText());
         String passwordText = String.valueOf(password.getText());
 
-        if(retypePassword.length() == 0){
+        if(retypePassword.length() == 0) {
             retypePassword.setError("Retype password is required");
+            return false;
+        }
+        else if(!retypePasswordText.equals(passwordText)){
+            retypePassword.setError("Retype password does not match password");
             return false;
         }
         else {

@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
         login = (Button) findViewById(R.id.login);
         forgetPassword = (TextView) findViewById(R.id.forget_password);
         createAccount = (TextView) findViewById(R.id.create_account);
@@ -32,9 +32,15 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, AccountContentActivity.class);
-                startActivity(intent);
-                finish();
+                boolean validAccount = true;
+                validAccount = isUsernameValid();
+                validAccount = isPasswordValid();
+
+                if(validAccount){
+                    Intent intent = new Intent(LoginActivity.this, AccountContentActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -55,5 +61,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    boolean isUsernameValid(){
+        String usernameText = String.valueOf(username.getText());
+
+        if(usernameText.length() == 0) {
+            username.setError("Username is required");
+            return false;
+        }
+        return true;
+    }
+
+    boolean isPasswordValid(){
+        String passwordText = String.valueOf(password.getText());
+
+        if(passwordText.length() == 0) {
+            password.setError("Password is required");
+            return false;
+        }
+        return true;
     }
 }
