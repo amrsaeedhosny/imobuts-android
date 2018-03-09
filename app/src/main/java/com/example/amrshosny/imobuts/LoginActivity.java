@@ -32,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Controller c = new Controller();
+                c.start();
                 boolean validAccount = true;
                 validAccount = isUsernameValid();
                 validAccount = isPasswordValid();
