@@ -6,16 +6,19 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by amrshosny on 10/03/18.
+ * Created by amrshosny on 11/03/18.
  */
 
-public class User {
+public class FormResponse {
     @SerializedName("username")
     @Expose
     private List<String> username = null;
     @SerializedName("email")
     @Expose
     private List<String> email = null;
+    @SerializedName("password")
+    @Expose
+    private List<String> password = null;
 
     public List<String> getUsername() {
         return username;
@@ -31,5 +34,12 @@ public class User {
 
     public void setEmail(List<String> email) {
         this.email = email;
+    }
+    public List<String> getPassword() {
+        return password;
+    }
+
+    public void setPassword(List<String> password) {
+        this.password = password;
     }
 }

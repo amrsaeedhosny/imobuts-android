@@ -1,5 +1,6 @@
 package com.example.amrshosny.imobuts;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.microedition.khronos.egl.EGLDisplay;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateAccountActivity extends AppCompatActivity {
     EditText username;
@@ -33,17 +38,47 @@ public class CreateAccountActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                boolean validNewAccount = true;
-                validNewAccount = isUsernameValid();
-                validNewAccount = isEmailValid();
-                validNewAccount = isPasswordValid();
-                validNewAccount = isRetypePasswordValid();
-                if(validNewAccount){
+               if(isFormValid()){
+                   String usernameText = String.valueOf(username.getText());
+                   String emailText = String.valueOf(email.getText());
+                   String passwordText = String.valueOf(password.getText());
+                   ApiController.getApi()
+                           .signUp(usernameText, emailText, passwordText)
+                           .enqueue(new Callback<JsonResponse<FormResponse>>() {
+                       @Override
+                       public void onResponse(Call<JsonResponse<FormResponse>> call, Response<JsonResponse<FormResponse>> response) {
+                           if(response.isSuccessful()){
+                               if(response.body().getSuccess()) {
+                                   finish();
+                               }
+                               else {
+                                   username.setError(response.body().getResponse().getUsername().get(0));
+                                   email.setError(response.body().getResponse().getEmail().get(0));
+                                   password.setError(response.body().getResponse().getPassword().get(0));
+                               }
+                           }
+                           else {
 
-                }
+                           }
+                       }
+
+                       @Override
+                       public void onFailure(Call<JsonResponse<FormResponse>> call, Throwable t) {
+
+                       }
+                   });
+               }
             }
         });
 
+    }
+
+    boolean isFormValid(){
+        boolean validUsername = isUsernameValid();
+        boolean validEmail = isEmailValid();
+        boolean validPassword = isPasswordValid();
+        boolean validRetypePassword = isRetypePasswordValid();
+        return validUsername && validEmail && validPassword && validRetypePassword;
     }
 
     boolean isUsernameValid(){
