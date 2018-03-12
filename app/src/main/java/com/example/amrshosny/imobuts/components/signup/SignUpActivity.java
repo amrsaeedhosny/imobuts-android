@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.api.ApiController;
-import com.example.amrshosny.imobuts.api.json.FormResponse;
+import com.example.amrshosny.imobuts.api.json.Form;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
 
 import java.util.regex.Matcher;
@@ -50,9 +50,9 @@ public class SignUpActivity extends AppCompatActivity {
 
                    ApiController.getApi()
                            .signUp(usernameText, emailText, passwordText)
-                           .enqueue(new Callback<JsonResponse<FormResponse>>() {
+                           .enqueue(new Callback<JsonResponse<Form>>() {
                        @Override
-                       public void onResponse(Call<JsonResponse<FormResponse>> call, Response<JsonResponse<FormResponse>> response) {
+                       public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
                            if(response.isSuccessful()){
                                Toast.makeText(getApplicationContext(), "Your account has been created", Toast.LENGTH_LONG).show();
                                if(response.body().getSuccess()) {
@@ -72,7 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
                        }
 
                        @Override
-                       public void onFailure(Call<JsonResponse<FormResponse>> call, Throwable t) {
+                       public void onFailure(Call<JsonResponse<Form>> call, Throwable t) {
                            Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                            signUp.setVisibility(View.VISIBLE);

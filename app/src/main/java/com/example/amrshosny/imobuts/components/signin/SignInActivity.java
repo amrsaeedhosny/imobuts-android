@@ -1,6 +1,7 @@
 package com.example.amrshosny.imobuts.components.signin;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ import com.example.amrshosny.imobuts.components.content.AccountContentActivity;
 import com.example.amrshosny.imobuts.components.forgetpassword.ForgetPasswordActivity;
 import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.api.ApiController;
-import com.example.amrshosny.imobuts.api.json.FormResponse;
+import com.example.amrshosny.imobuts.api.json.Form;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
 import com.example.amrshosny.imobuts.components.signup.SignUpActivity;
 
@@ -54,9 +55,9 @@ public class SignInActivity extends AppCompatActivity {
 
                     ApiController.getApi()
                             .signIn(usernameText, passwordText)
-                            .enqueue(new Callback<JsonResponse<FormResponse>>() {
+                            .enqueue(new Callback<JsonResponse<Form>>() {
                         @Override
-                        public void onResponse(Call<JsonResponse<FormResponse>> call, Response<JsonResponse<FormResponse>> response) {
+                        public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
                             if(response.isSuccessful()){
                                 if(response.body().getSuccess()) {
                                     Intent intent = new Intent(SignInActivity.this, AccountContentActivity.class);
@@ -78,7 +79,7 @@ public class SignInActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<JsonResponse<FormResponse>> call, Throwable t) {
+                        public void onFailure(Call<JsonResponse<Form>> call, Throwable t) {
                             Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
                             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                             signIn.setVisibility(View.VISIBLE);

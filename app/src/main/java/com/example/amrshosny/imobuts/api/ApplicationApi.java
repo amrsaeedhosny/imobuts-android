@@ -1,7 +1,8 @@
 package com.example.amrshosny.imobuts.api;
 
-import com.example.amrshosny.imobuts.api.json.FormResponse;
+import com.example.amrshosny.imobuts.api.json.Form;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
+import com.example.amrshosny.imobuts.api.json.User;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -15,15 +16,20 @@ public interface ApplicationApi {
 
     @FormUrlEncoded
     @POST("signUp")
-    Call<JsonResponse<FormResponse>> signUp(@Field("username") String username,
-                                            @Field("email") String email,
-                                            @Field("password") String password);
+    Call<JsonResponse<Form>> signUp(@Field("username") String username,
+                                    @Field("email") String email,
+                                    @Field("password") String password);
 
     @FormUrlEncoded
     @POST("signIn")
-    Call<JsonResponse<FormResponse>> signIn(@Field("username") String username,
-                                            @Field("password") String password);
+    Call<JsonResponse<Form>> signIn(@Field("username") String username,
+                                    @Field("password") String password);
 
     @GET("resetPassword")
-    Call<JsonResponse<FormResponse>> resetPassword(@Query("email") String email);
+    Call<JsonResponse<Form>> resetPassword(@Query("email") String email);
+
+    @GET("getProfile")
+    Call<JsonResponse<User>> getProfile(@Query("token") String token);
+
+
 }

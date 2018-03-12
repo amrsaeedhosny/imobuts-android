@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.api.ApiController;
-import com.example.amrshosny.imobuts.api.json.FormResponse;
+import com.example.amrshosny.imobuts.api.json.Form;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
 
 import java.util.regex.Matcher;
@@ -40,9 +40,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 String emailText = String.valueOf(email.getText());
                 ApiController.getApi()
                         .resetPassword(emailText)
-                        .enqueue(new Callback<JsonResponse<FormResponse>>() {
+                        .enqueue(new Callback<JsonResponse<Form>>() {
                     @Override
-                    public void onResponse(Call<JsonResponse<FormResponse>> call, Response<JsonResponse<FormResponse>> response) {
+                    public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
                         if(response.isSuccessful()){
                             if(response.body().getSuccess()){
                                 Toast.makeText(getApplicationContext(), "A message has been sent to your email", Toast.LENGTH_LONG).show();
@@ -59,7 +59,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<JsonResponse<FormResponse>> call, Throwable t) {
+                    public void onFailure(Call<JsonResponse<Form>> call, Throwable t) {
                         Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
                         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                         send.setVisibility(View.VISIBLE);
