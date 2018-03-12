@@ -17,10 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".AccountContentActivity" />
-        <activity android:name=".ForgetPasswordActivity"></activity>
+        <activity android:name=".components.signin.SignInActivity" />
+        <activity android:name=".components.signup.SignUpActivity" />
+        <activity android:name=".components.content.AccountContentActivity" />
+        <activity android:name=".components.forgetpassword.ForgetPasswordActivity"></activity>
     </application>
 
 </manifest>

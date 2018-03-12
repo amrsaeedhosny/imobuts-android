@@ -1,14 +1,10 @@
-package com.example.amrshosny.imobuts;
+package com.example.amrshosny.imobuts.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-/**
- * Created by amrshosny on 09/03/18.
- */
 
 public class ApiController {
     private static ApiController apiController;

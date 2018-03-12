@@ -1,4 +1,4 @@
-package com.example.amrshosny.imobuts;
+package com.example.amrshosny.imobuts.components.forgetpassword;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.amrshosny.imobuts.R;
+import com.example.amrshosny.imobuts.api.ApiController;
+import com.example.amrshosny.imobuts.api.json.FormResponse;
+import com.example.amrshosny.imobuts.api.json.JsonResponse;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

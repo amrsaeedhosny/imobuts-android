@@ -1,4 +1,4 @@
-package com.example.amrshosny.imobuts;
+package com.example.amrshosny.imobuts.api.json;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

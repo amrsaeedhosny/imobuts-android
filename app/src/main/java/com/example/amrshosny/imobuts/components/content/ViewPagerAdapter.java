@@ -1,4 +1,4 @@
-package com.example.amrshosny.imobuts;
+package com.example.amrshosny.imobuts.components.content;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

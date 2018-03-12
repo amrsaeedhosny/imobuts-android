@@ -1,4 +1,4 @@
-package com.example.amrshosny.imobuts;
+package com.example.amrshosny.imobuts.components.signin;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +9,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.amrshosny.imobuts.components.content.AccountContentActivity;
+import com.example.amrshosny.imobuts.components.forgetpassword.ForgetPasswordActivity;
+import com.example.amrshosny.imobuts.R;
+import com.example.amrshosny.imobuts.api.ApiController;
+import com.example.amrshosny.imobuts.api.json.FormResponse;
+import com.example.amrshosny.imobuts.api.json.JsonResponse;
+import com.example.amrshosny.imobuts.components.signup.SignUpActivity;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
     EditText username;
     EditText password;
-    Button login;
+    Button signIn;
     TextView forgetPassword;
     TextView createAccount;
 
@@ -24,20 +32,20 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_in);
 
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
-        login = (Button) findViewById(R.id.login);
+        signIn = (Button) findViewById(R.id.login);
         forgetPassword = (TextView) findViewById(R.id.forget_password);
         createAccount = (TextView) findViewById(R.id.create_account);
 
 
-        login.setOnClickListener(new View.OnClickListener() {
+        signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isFormValid()){
-                    login.setVisibility(View.GONE);
+                    signIn.setVisibility(View.GONE);
                     findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
 
 
@@ -51,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(Call<JsonResponse<FormResponse>> call, Response<JsonResponse<FormResponse>> response) {
                             if(response.isSuccessful()){
                                 if(response.body().getSuccess()) {
-                                    Intent intent = new Intent(LoginActivity.this, AccountContentActivity.class);
+                                    Intent intent = new Intent(SignInActivity.this, AccountContentActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -66,14 +74,14 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                            login.setVisibility(View.VISIBLE);
+                            signIn.setVisibility(View.VISIBLE);
                         }
 
                         @Override
                         public void onFailure(Call<JsonResponse<FormResponse>> call, Throwable t) {
                             Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
                             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                            login.setVisibility(View.VISIBLE);
+                            signIn.setVisibility(View.VISIBLE);
                         }
                     });
                 }
@@ -83,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -91,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         forgetPassword.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+                Intent intent = new Intent(SignInActivity.this, ForgetPasswordActivity.class);
                 startActivity(intent);
             }
         });

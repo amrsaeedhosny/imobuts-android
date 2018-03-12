@@ -1,4 +1,7 @@
-package com.example.amrshosny.imobuts;
+package com.example.amrshosny.imobuts.api;
+
+import com.example.amrshosny.imobuts.api.json.FormResponse;
+import com.example.amrshosny.imobuts.api.json.JsonResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
