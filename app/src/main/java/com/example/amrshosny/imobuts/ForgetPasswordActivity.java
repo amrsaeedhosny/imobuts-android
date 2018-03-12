@@ -5,9 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
 
@@ -24,11 +29,39 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                boolean validEmail = true;
-                validEmail = isEmailValid();
-                if(validEmail){
+            if(isEmailValid()){
+                send.setVisibility(View.GONE);
+                findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                String emailText = String.valueOf(email.getText());
+                ApiController.getApi()
+                        .resetPassword(emailText)
+                        .enqueue(new Callback<JsonResponse<FormResponse>>() {
+                    @Override
+                    public void onResponse(Call<JsonResponse<FormResponse>> call, Response<JsonResponse<FormResponse>> response) {
+                        if(response.isSuccessful()){
+                            if(response.body().getSuccess()){
+                                Toast.makeText(getApplicationContext(), "A message has been sent to your email", Toast.LENGTH_LONG).show();
+                            }
+                            else {
+                                email.setError(response.body().getResponse().getEmail());
+                            }
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Some error has occurred", Toast.LENGTH_LONG).show();
+                        }
+                        send.setVisibility(View.VISIBLE);
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                    }
 
-                }
+                    @Override
+                    public void onFailure(Call<JsonResponse<FormResponse>> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        send.setVisibility(View.VISIBLE);
+                    }
+                });
+
+            }
             }
         });
     }
@@ -43,6 +76,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         }
         else if(!matcher.matches()){
             email.setError("Email format is incorrect");
+            return false;
         }
         else {
             email.setError(null);

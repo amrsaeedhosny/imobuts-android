@@ -1,17 +1,14 @@
 package com.example.amrshosny.imobuts;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.microedition.khronos.egl.EGLDisplay;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,9 +36,13 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                if(isFormValid()){
+                   button.setVisibility(View.GONE);
+                   findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+
                    String usernameText = String.valueOf(username.getText());
                    String emailText = String.valueOf(email.getText());
                    String passwordText = String.valueOf(password.getText());
+
                    ApiController.getApi()
                            .signUp(usernameText, emailText, passwordText)
                            .enqueue(new Callback<JsonResponse<FormResponse>>() {
@@ -52,19 +53,23 @@ public class CreateAccountActivity extends AppCompatActivity {
                                    finish();
                                }
                                else {
-                                   username.setError(response.body().getResponse().getUsername().get(0));
-                                   email.setError(response.body().getResponse().getEmail().get(0));
-                                   password.setError(response.body().getResponse().getPassword().get(0));
+                                   username.setError(response.body().getResponse().getUsername());
+                                   email.setError(response.body().getResponse().getEmail());
+                                   password.setError(response.body().getResponse().getPassword());
                                }
                            }
                            else {
-
+                               Toast.makeText(getApplicationContext(), "Some error has occurred", Toast.LENGTH_LONG).show();
                            }
+                           findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                           button.setVisibility(View.VISIBLE);
                        }
 
                        @Override
                        public void onFailure(Call<JsonResponse<FormResponse>> call, Throwable t) {
-
+                           Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
+                           findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                           button.setVisibility(View.VISIBLE);
                        }
                    });
                }

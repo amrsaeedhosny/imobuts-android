@@ -12,34 +12,35 @@ import java.util.List;
 public class FormResponse {
     @SerializedName("username")
     @Expose
-    private List<String> username = null;
+    private String username = null;
     @SerializedName("email")
     @Expose
-    private List<String> email = null;
+    private String email = null;
     @SerializedName("password")
     @Expose
-    private List<String> password = null;
+    private String password = null;
 
-    public List<String> getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(List<String> username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public List<String> getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(List<String> email) {
+    public void setEmail(String email) {
         this.email = email;
     }
-    public List<String> getPassword() {
+
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(List<String> password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }
