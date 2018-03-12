@@ -27,14 +27,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Username"
-            android:padding="16dp"/>
+            android:padding="16dp"
+            android:background="#fffffe"
+            android:layout_margin="5dp"/>
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
             android:padding="16dp"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:background="#fffffe"
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/login"
             android:layout_width="match_parent"
@@ -42,7 +46,19 @@
             android:text="Login"
             android:background="#AA0000"
             android:textColor="#E0E0E0"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:layout_margin="5dp"/>
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone">
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+        </RelativeLayout>
         <TextView
             android:id="@+id/forget_password"
             android:layout_width="match_parent"
@@ -59,6 +75,7 @@
             android:textColor="@android:color/black"
             android:gravity="center"
             android:layout_marginTop="8dp"/>
+
 
     </LinearLayout>
 </RelativeLayout>

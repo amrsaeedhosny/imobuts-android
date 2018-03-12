@@ -1,9 +1,11 @@
-package com.example.amrshosny.imobuts;
+package com.example.amrshosny.imobuts.components.content;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.amrshosny.imobuts.R;
 
 public class AccountContentActivity extends AppCompatActivity {
     TabLayout tabLayout;
