@@ -54,8 +54,8 @@ public class SignUpActivity extends AppCompatActivity {
                        @Override
                        public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
                            if(response.isSuccessful()){
-                               Toast.makeText(getApplicationContext(), "Your account has been created", Toast.LENGTH_LONG).show();
                                if(response.body().getSuccess()) {
+                                   Toast.makeText(getApplicationContext(), "Your account has been created", Toast.LENGTH_LONG).show();
                                    finish();
                                }
                                else {

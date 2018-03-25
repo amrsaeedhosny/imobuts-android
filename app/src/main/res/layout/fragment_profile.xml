@@ -1,49 +1,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="40dp"
-                android:text="50.00"
-                android:textColor="#AA0000"
-                android:textSize="30sp"
-                android:background="@drawable/rounded_textview"
-                android:fontFamily="cursive"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="#db66"
             android:orientation="vertical">
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="username: amrshosny"
-                android:textSize="20dp"/>
-            <TextView
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:gravity="center"
+                    android:layout_margin="30dp"
+                    android:text="50.00"
+                    android:textColor="#db66"
+                    android:textSize="30sp"
+                    android:background="@drawable/rounded_textview"
+                    android:fontFamily="cursive"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="email: amrshosny@gmail.com"
-                android:textSize="20dp"/>
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="amrsaeed"
+                    android:gravity="center"
+                    android:textColor="#f5f5f5"
+                    android:textSize="30sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="amrshosny@gmail.com"
+                    android:gravity="center"
+                    android:textColor="#f5f5f5"
+                    android:textSize="15sp"/>
+            </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
-
-
 </RelativeLayout>
