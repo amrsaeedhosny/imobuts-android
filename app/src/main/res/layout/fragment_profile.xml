@@ -22,7 +22,8 @@
                     android:textColor="#f5f5f5"
                     android:textSize="35sp"
                     android:textStyle="bold"
-                    android:layout_margin="20dp"/>
+                    android:layout_margin="20dp"
+                    android:id="@+id/username"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,7 +40,8 @@
                     android:textSize="30sp"
                     android:background="@drawable/rounded_textview"
                     android:fontFamily="cursive"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:id="@+id/balance"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -65,7 +67,8 @@
                     android:layout_marginTop="5dp"
                     android:textColor="#f5f5f5"
                     android:textSize="15sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:id="@+id/email"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -82,7 +85,8 @@
                     android:layout_marginTop="5dp"
                     android:textColor="#f5f5f5"
                     android:textSize="15sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:id="@+id/address"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -90,6 +94,34 @@
                     android:layout_gravity="center"
                     android:textColor="#f5f5f5"
                     android:textSize="15sp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_margin="20dp">
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/edit_profile"
+                        android:text="Edit Profile"
+                        android:textAllCaps="false"
+                        android:textSize="10sp"
+                        android:textColor="#db66"
+                        android:background="#f5f5f5"
+                        />
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/charge"
+                        android:text="Charge"
+                        android:textAllCaps="false"
+                        android:textColor="#db66"
+                        android:background="#f5f5f5"
+                        android:textSize="10sp"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 </RelativeLayout>

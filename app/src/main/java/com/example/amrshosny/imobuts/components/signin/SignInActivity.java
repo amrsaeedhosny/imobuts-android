@@ -1,5 +1,6 @@
 package com.example.amrshosny.imobuts.components.signin;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -60,6 +61,11 @@ public class SignInActivity extends AppCompatActivity {
                         public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
                             if(response.isSuccessful()){
                                 if(response.body().getSuccess()) {
+                                    SharedPreferences sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("token", response.body().getToken());
+                                    editor.commit();
+
                                     Intent intent = new Intent(SignInActivity.this, AccountContentActivity.class);
                                     startActivity(intent);
                                     finish();
