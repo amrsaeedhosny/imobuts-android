@@ -31,5 +31,12 @@ public interface ApplicationApi {
     @GET("getProfile")
     Call<JsonResponse<User>> getProfile(@Query("token") String token);
 
+    @FormUrlEncoded
+    @POST("updateProfile")
+    Call<JsonResponse<Form>> updateProfile(@Query("token") String token,
+                                    @Field("username") String username,
+                                    @Field("email") String email,
+                                    @Field("password") String password);
+
 
 }

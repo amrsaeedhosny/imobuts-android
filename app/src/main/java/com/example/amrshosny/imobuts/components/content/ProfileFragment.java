@@ -1,11 +1,8 @@
 package com.example.amrshosny.imobuts.components.content;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,12 +13,9 @@ import android.widget.TextView;
 
 import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.api.ApiController;
-import com.example.amrshosny.imobuts.api.json.Form;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
 import com.example.amrshosny.imobuts.api.json.User;
-import com.example.amrshosny.imobuts.components.signin.SignInActivity;
-
-import org.w3c.dom.Text;
+import com.example.amrshosny.imobuts.components.updateprofile.UpdateProfile;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +25,6 @@ public class ProfileFragment extends Fragment {
     TextView username;
     TextView balance;
     TextView email;
-    TextView address;
     Button editProfile;
     String token;
 
@@ -50,14 +43,16 @@ public class ProfileFragment extends Fragment {
         username = (TextView) view.findViewById(R.id.username);
         balance = (TextView) view.findViewById(R.id.balance);
         email = (TextView) view.findViewById(R.id.email);
-        address = (TextView) view.findViewById(R.id.address);
         editProfile = (Button) view.findViewById(R.id.edit_profile);
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(SignInActivity.this, AccountContentActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), UpdateProfile.class);
+                intent.putExtra("username", username.getText().toString());
+                intent.putExtra("email", email.getText().toString());
+                startActivity(intent);
+
             }
         });
 
@@ -73,7 +68,6 @@ public class ProfileFragment extends Fragment {
                             username.setText(response.body().getResponse().getUsername());
                             balance.setText(response.body().getResponse().getBalance().toString());
                             email.setText(response.body().getResponse().getEmail());
-                            address.setText(response.body().getResponse().getAddress());
                         }
                     }
 

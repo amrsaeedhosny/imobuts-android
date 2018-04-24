@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.amrshosny.imobuts">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/imobuts_icon"
@@ -20,7 +22,8 @@
         <activity android:name=".components.signin.SignInActivity" />
         <activity android:name=".components.signup.SignUpActivity" />
         <activity android:name=".components.content.AccountContentActivity" />
-        <activity android:name=".components.forgetpassword.ForgetPasswordActivity"></activity>
+        <activity android:name=".components.forgetpassword.ForgetPasswordActivity" />
+        <activity android:name=".components.updateprofile.UpdateProfile"></activity>
     </application>
 
 </manifest>

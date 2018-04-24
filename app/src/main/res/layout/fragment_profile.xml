@@ -17,7 +17,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="amrsaeed"
+                    android:text="username"
                     android:gravity="center"
                     android:textColor="#f5f5f5"
                     android:textSize="35sp"
@@ -35,7 +35,7 @@
                     android:layout_height="150dp"
                     android:gravity="center"
                     android:layout_margin="30dp"
-                    android:text="50.00"
+                    android:text="0"
                     android:textColor="#db66"
                     android:textSize="30sp"
                     android:background="@drawable/rounded_textview"
@@ -67,33 +67,15 @@
                     android:layout_marginTop="5dp"
                     android:textColor="#f5f5f5"
                     android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:id="@+id/email"/>
+                    android:textStyle="bold"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/email"
                     android:layout_gravity="center"
-                    android:text="amrshosny@gmail.com"
-                    android:textColor="#f5f5f5"
-                    android:textSize="15sp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Address:"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="5dp"
-                    android:textColor="#f5f5f5"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:id="@+id/address"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Faisal Street at Giza"
-                    android:layout_gravity="center"
-                    android:textColor="#f5f5f5"
-                    android:textSize="15sp"/>
+                    android:text="example@gmail.com"
+                    android:textColor="#f5f5f5"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
@@ -105,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:id="@+id/edit_profile"
-                        android:text="Edit Profile"
+                        android:text="Update Profile"
                         android:textAllCaps="false"
                         android:textSize="10sp"
                         android:textColor="#db66"

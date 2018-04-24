@@ -10,9 +10,6 @@ public class User {
     @SerializedName("email")
     @Expose
     private String email;
-    @SerializedName("address")
-    @Expose
-    private String address;
     @SerializedName("balance")
     @Expose
     private Integer balance;
@@ -32,14 +29,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public Integer getBalance() {
