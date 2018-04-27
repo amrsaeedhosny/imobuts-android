@@ -15,6 +15,7 @@ import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.api.ApiController;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
 import com.example.amrshosny.imobuts.api.json.User;
+import com.example.amrshosny.imobuts.components.signin.SignInActivity;
 import com.example.amrshosny.imobuts.components.updateprofile.UpdateProfile;
 
 import retrofit2.Call;
@@ -27,6 +28,8 @@ public class ProfileFragment extends Fragment {
     TextView balance;
     TextView email;
     Button updateProfile;
+    Button charge;
+    Button logout;
     SharedPreferences sharedPreferences;
     String token;
 
@@ -46,6 +49,8 @@ public class ProfileFragment extends Fragment {
         balance = (TextView) view.findViewById(R.id.balance);
         email = (TextView) view.findViewById(R.id.email);
         updateProfile = (Button) view.findViewById(R.id.edit_profile);
+        charge = (Button) view.findViewById(R.id.charge);
+        logout = (Button) view.findViewById(R.id.logout);
         sharedPreferences = this.getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("token", null);
 
@@ -57,6 +62,16 @@ public class ProfileFragment extends Fragment {
                 intent.putExtra("email", email.getText().toString());
                 startActivity(intent);
 
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sharedPreferences.edit().remove("token").commit();
+                Intent intent = new Intent(getActivity(), SignInActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 
