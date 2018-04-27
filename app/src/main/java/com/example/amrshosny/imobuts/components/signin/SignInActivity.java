@@ -49,48 +49,7 @@ public class SignInActivity extends AppCompatActivity {
                 if(isFormValid()){
                     signIn.setVisibility(View.GONE);
                     findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-
-
-                    String usernameText = String.valueOf(username.getText());
-                    String passwordText = String.valueOf(password.getText());
-
-                    ApiController.getApi()
-                            .signIn(usernameText, passwordText)
-                            .enqueue(new Callback<JsonResponse<Form>>() {
-                        @Override
-                        public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
-                            if(response.isSuccessful()){
-                                if(response.body().getSuccess()) {
-                                    SharedPreferences sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString("token", response.body().getToken());
-                                    editor.commit();
-
-                                    Intent intent = new Intent(SignInActivity.this, AccountContentActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                                else {
-                                    username.setError(response.body().getResponse().getUsername());
-                                    password.setError(response.body().getResponse().getPassword());
-
-                                }
-                            }
-                            else {
-                                Toast.makeText(getApplicationContext(), "Some error has occurred", Toast.LENGTH_LONG).show();
-
-                            }
-                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                            signIn.setVisibility(View.VISIBLE);
-                        }
-
-                        @Override
-                        public void onFailure(Call<JsonResponse<Form>> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
-                            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                            signIn.setVisibility(View.VISIBLE);
-                        }
-                    });
+                    signInApi();
                 }
             }
         });
@@ -143,5 +102,45 @@ public class SignInActivity extends AppCompatActivity {
             password.setError(null);
         }
         return true;
+    }
+
+    void signInApi(){
+        ApiController.getApi()
+                .signIn(username.getText().toString(), password.getText().toString())
+                .enqueue(new Callback<JsonResponse<Form>>() {
+                    @Override
+                    public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
+                        if(response.isSuccessful()){
+                            if(response.body().getSuccess()) {
+                                SharedPreferences sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("token", response.body().getToken());
+                                editor.commit();
+
+                                Intent intent = new Intent(SignInActivity.this, AccountContentActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                            else {
+                                username.setError(response.body().getResponse().getUsername());
+                                password.setError(response.body().getResponse().getPassword());
+
+                            }
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Some error has occurred", Toast.LENGTH_LONG).show();
+
+                        }
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        signIn.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonResponse<Form>> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        signIn.setVisibility(View.VISIBLE);
+                    }
+                });
     }
 }

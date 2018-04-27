@@ -20,14 +20,6 @@ class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // Temporary Solution
-        switch (position)
-        {
-            case 0:
-                mFragmentList.set(0, new TicketsFragment());
-            case 1:
-                mFragmentList.set(1, new ProfileFragment());
-        }
         return mFragmentList.get(position);
     }
 

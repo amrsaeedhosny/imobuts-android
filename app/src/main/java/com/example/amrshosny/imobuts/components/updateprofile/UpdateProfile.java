@@ -29,68 +29,33 @@ public class UpdateProfile extends AppCompatActivity {
     EditText password;
     EditText retypePassword;
     Button updateProfile;
+    Bundle extras;
+    SharedPreferences sharedPreferences;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
-
         username = (EditText) findViewById(R.id.username);
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
         retypePassword = (EditText) findViewById(R.id.retype_password);
         updateProfile = (Button) findViewById(R.id.update_profile);
-
-        Bundle extras = getIntent().getExtras();
+        sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE);
+        token = sharedPreferences.getString("token", null);
+        extras = getIntent().getExtras();
         username.setText(extras.getString("username"));
         email.setText(extras.getString("email"));
 
         updateProfile.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(isFormValid()){
-                    updateProfile.setVisibility(View.GONE);
-                    findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-
-                    String usernameText = String.valueOf(username.getText());
-                    String emailText = String.valueOf(email.getText());
-                    String passwordText = String.valueOf(password.getText());
-                    SharedPreferences sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE);
-                    String token = sharedPreferences.getString("token", null);
-
-
-                    ApiController.getApi()
-                            .updateProfile(token, usernameText, emailText, passwordText)
-                            .enqueue(new Callback<JsonResponse<Form>>() {
-                                @Override
-                                public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
-                                    if(response.isSuccessful()){
-                                        if(response.body().getSuccess()) {
-                                            Toast.makeText(getApplicationContext(), "Your profile has been updated", Toast.LENGTH_LONG).show();
-
-                                            finish();
-                                        }
-                                        else {
-                                            username.setError(response.body().getResponse().getUsername());
-                                            email.setError(response.body().getResponse().getEmail());
-                                            password.setError(response.body().getResponse().getPassword());
-                                        }
-                                    }
-                                    else {
-                                        Toast.makeText(getApplicationContext(), "Some error has occurred", Toast.LENGTH_LONG).show();
-                                    }
-                                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                                    updateProfile.setVisibility(View.VISIBLE);
-                                }
-
-                                @Override
-                                public void onFailure(Call<JsonResponse<Form>> call, Throwable t) {
-                                    Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
-                                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                                    updateProfile.setVisibility(View.VISIBLE);
-                                }
-                            });
-                }
+            if(isFormValid()){
+                updateProfile.setVisibility(View.GONE);
+                findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                updateProfileApi();
+            }
             }
         });
     }
@@ -180,5 +145,39 @@ public class UpdateProfile extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    void updateProfileApi(){
+        ApiController.getApi()
+                .updateProfile(token, username.getText().toString(), email.getText().toString(), password.getText().toString())
+                .enqueue(new Callback<JsonResponse<Form>>() {
+                    @Override
+                    public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
+                        if(response.isSuccessful()){
+                            if(response.body().getSuccess()) {
+                                Toast.makeText(getApplicationContext(), "Your profile has been updated", Toast.LENGTH_LONG).show();
+
+                                finish();
+                            }
+                            else {
+                                username.setError(response.body().getResponse().getUsername());
+                                email.setError(response.body().getResponse().getEmail());
+                                password.setError(response.body().getResponse().getPassword());
+                            }
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Some error has occurred", Toast.LENGTH_LONG).show();
+                        }
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        updateProfile.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonResponse<Form>> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        updateProfile.setVisibility(View.VISIBLE);
+                    }
+                });
     }
 }

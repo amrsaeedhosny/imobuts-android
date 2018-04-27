@@ -19,9 +19,9 @@ public class TicketsAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private ArrayList<Ticket> mDataSource;
 
-    public TicketsAdapter(Context context, ArrayList<Ticket> items) {
+    public TicketsAdapter(Context context, ArrayList<Ticket> tickets) {
         mContext = context;
-        mDataSource = items;
+        mDataSource = tickets;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 

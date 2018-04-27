@@ -24,7 +24,7 @@ import retrofit2.Response;
 
 public class TicketsFragment extends Fragment {
     View view;
-    private ListView mListView;
+    ListView mListView;
     ArrayList<Ticket> tickets;
     SharedPreferences sharedPreferences;
     String token;
@@ -44,6 +44,12 @@ public class TicketsFragment extends Fragment {
         sharedPreferences = this.getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("token", null);
 
+        getTicketsApi();
+
+        return view;
+    }
+
+    void getTicketsApi(){
         ApiController.getApi()
                 .getTickets(token)
                 .enqueue(new Callback<JsonResponse<ArrayList<Ticket>>>() {
@@ -61,7 +67,5 @@ public class TicketsFragment extends Fragment {
 
                     }
                 });
-
-        return view;
     }
 }

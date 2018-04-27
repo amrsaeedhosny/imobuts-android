@@ -22,10 +22,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileFragment extends Fragment {
+    View view;
     TextView username;
     TextView balance;
     TextView email;
-    Button editProfile;
+    Button updateProfile;
+    SharedPreferences sharedPreferences;
     String token;
 
     public ProfileFragment() {
@@ -39,13 +41,15 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        view = inflater.inflate(R.layout.fragment_profile, container, false);
         username = (TextView) view.findViewById(R.id.username);
         balance = (TextView) view.findViewById(R.id.balance);
         email = (TextView) view.findViewById(R.id.email);
-        editProfile = (Button) view.findViewById(R.id.edit_profile);
+        updateProfile = (Button) view.findViewById(R.id.edit_profile);
+        sharedPreferences = this.getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
+        token = sharedPreferences.getString("token", null);
 
-        editProfile.setOnClickListener(new View.OnClickListener() {
+        updateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), UpdateProfile.class);
@@ -56,26 +60,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
-        token = sharedPreferences.getString("token", null);
-
-        ApiController.getApi()
-                .getProfile(token)
-                .enqueue(new Callback<JsonResponse<User>>() {
-                    @Override
-                    public void onResponse(Call<JsonResponse<User>> call, Response<JsonResponse<User>> response) {
-                        if(response.body().getSuccess()){
-                            username.setText(response.body().getResponse().getUsername());
-                            balance.setText(response.body().getResponse().getBalance().toString());
-                            email.setText(response.body().getResponse().getEmail());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<JsonResponse<User>> call, Throwable t) {
-
-                    }
-                });
+        getProfileApi();
 
         return view;
     }
@@ -83,9 +68,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
-        token = sharedPreferences.getString("token", null);
+        getProfileApi();
+    }
 
+    void getProfileApi(){
         ApiController.getApi()
                 .getProfile(token)
                 .enqueue(new Callback<JsonResponse<User>>() {
@@ -103,6 +89,5 @@ public class ProfileFragment extends Fragment {
 
                     }
                 });
-
     }
 }

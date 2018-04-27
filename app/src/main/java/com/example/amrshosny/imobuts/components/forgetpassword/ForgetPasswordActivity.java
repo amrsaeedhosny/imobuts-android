@@ -37,10 +37,34 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             if(isEmailValid()){
                 send.setVisibility(View.GONE);
                 findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-                String emailText = String.valueOf(email.getText());
-                ApiController.getApi()
-                        .resetPassword(emailText)
-                        .enqueue(new Callback<JsonResponse<Form>>() {
+                forgetPasswordApi();
+            }
+            }
+        });
+    }
+
+    boolean isEmailValid(){
+        String emailText = String.valueOf(email.getText());
+        Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,4}$");
+        Matcher matcher = pattern.matcher(emailText);
+        if(email.length() == 0) {
+            email.setError("Email is required");
+            return false;
+        }
+        else if(!matcher.matches()){
+            email.setError("Email format is incorrect");
+            return false;
+        }
+        else {
+            email.setError(null);
+        }
+        return true;
+    }
+
+    void forgetPasswordApi(){
+        ApiController.getApi()
+                .resetPassword(email.getText().toString())
+                .enqueue(new Callback<JsonResponse<Form>>() {
                     @Override
                     public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
                         if(response.isSuccessful()){
@@ -65,27 +89,5 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                         send.setVisibility(View.VISIBLE);
                     }
                 });
-
-            }
-            }
-        });
-    }
-
-    boolean isEmailValid(){
-        String emailText = String.valueOf(email.getText());
-        Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+\\-]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,4}$");
-        Matcher matcher = pattern.matcher(emailText);
-        if(email.length() == 0) {
-            email.setError("Email is required");
-            return false;
-        }
-        else if(!matcher.matches()){
-            email.setError("Email format is incorrect");
-            return false;
-        }
-        else {
-            email.setError(null);
-        }
-        return true;
     }
 }
