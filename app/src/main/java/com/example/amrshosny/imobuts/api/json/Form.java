@@ -5,11 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by amrshosny on 11/03/18.
- */
-
-public class FormResponse {
+public class Form {
     @SerializedName("username")
     @Expose
     private String username = null;

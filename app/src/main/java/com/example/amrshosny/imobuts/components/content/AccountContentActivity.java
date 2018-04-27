@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.amrshosny.imobuts.R;
+import com.example.amrshosny.imobuts.components.content.profile.ProfileFragment;
+import com.example.amrshosny.imobuts.components.content.tickets.TicketsFragment;
 
 public class AccountContentActivity extends AppCompatActivity {
     TabLayout tabLayout;

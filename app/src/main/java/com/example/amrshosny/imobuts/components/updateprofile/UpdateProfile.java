@@ -1,5 +1,9 @@
-package com.example.amrshosny.imobuts.components.signup;
+package com.example.amrshosny.imobuts.components.updateprofile;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,70 +23,78 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignUpActivity extends AppCompatActivity {
+public class UpdateProfile extends AppCompatActivity {
     EditText username;
     EditText email;
     EditText password;
     EditText retypePassword;
-    Button signUp;
+    Button updateProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_update_profile);
 
         username = (EditText) findViewById(R.id.username);
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
         retypePassword = (EditText) findViewById(R.id.retype_password);
-        signUp = (Button) findViewById(R.id.create_account);
+        updateProfile = (Button) findViewById(R.id.update_profile);
 
-        signUp.setOnClickListener(new View.OnClickListener(){
+        Bundle extras = getIntent().getExtras();
+        username.setText(extras.getString("username"));
+        email.setText(extras.getString("email"));
+
+        updateProfile.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-               if(isFormValid()){
-                   signUp.setVisibility(View.GONE);
-                   findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                if(isFormValid()){
+                    updateProfile.setVisibility(View.GONE);
+                    findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
 
-                   String usernameText = String.valueOf(username.getText());
-                   String emailText = String.valueOf(email.getText());
-                   String passwordText = String.valueOf(password.getText());
+                    String usernameText = String.valueOf(username.getText());
+                    String emailText = String.valueOf(email.getText());
+                    String passwordText = String.valueOf(password.getText());
+                    SharedPreferences sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE);
+                    String token = sharedPreferences.getString("token", null);
 
-                   ApiController.getApi()
-                           .signUp(usernameText, emailText, passwordText)
-                           .enqueue(new Callback<JsonResponse<Form>>() {
-                       @Override
-                       public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
-                           if(response.isSuccessful()){
-                               if(response.body().getSuccess()) {
-                                   Toast.makeText(getApplicationContext(), "Your account has been created", Toast.LENGTH_LONG).show();
-                                   finish();
-                               }
-                               else {
-                                   username.setError(response.body().getResponse().getUsername());
-                                   email.setError(response.body().getResponse().getEmail());
-                                   password.setError(response.body().getResponse().getPassword());
-                               }
-                           }
-                           else {
-                               Toast.makeText(getApplicationContext(), "Some error has occurred", Toast.LENGTH_LONG).show();
-                           }
-                           findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                           signUp.setVisibility(View.VISIBLE);
-                       }
 
-                       @Override
-                       public void onFailure(Call<JsonResponse<Form>> call, Throwable t) {
-                           Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
-                           findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                           signUp.setVisibility(View.VISIBLE);
-                       }
-                   });
-               }
+                    ApiController.getApi()
+                            .updateProfile(token, usernameText, emailText, passwordText)
+                            .enqueue(new Callback<JsonResponse<Form>>() {
+                                @Override
+                                public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
+                                    if(response.isSuccessful()){
+                                        if(response.body().getSuccess()) {
+                                            Toast.makeText(getApplicationContext(), "Your profile has been updated", Toast.LENGTH_LONG).show();
+
+                                            finish();
+                                        }
+                                        else {
+                                            username.setError(response.body().getResponse().getUsername());
+                                            email.setError(response.body().getResponse().getEmail());
+                                            password.setError(response.body().getResponse().getPassword());
+                                        }
+                                    }
+                                    else {
+                                        Toast.makeText(getApplicationContext(), "Some error has occurred", Toast.LENGTH_LONG).show();
+                                    }
+                                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                                    updateProfile.setVisibility(View.VISIBLE);
+                                }
+
+                                @Override
+                                public void onFailure(Call<JsonResponse<Form>> call, Throwable t) {
+                                    Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
+                                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                                    updateProfile.setVisibility(View.VISIBLE);
+                                }
+                            });
+                }
             }
         });
-
     }
+
 
     boolean isFormValid(){
         boolean validUsername = isUsernameValid();
@@ -169,6 +181,4 @@ public class SignUpActivity extends AppCompatActivity {
 
         return true;
     }
-
-
 }
