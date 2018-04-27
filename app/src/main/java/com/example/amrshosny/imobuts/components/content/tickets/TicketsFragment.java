@@ -1,20 +1,21 @@
 package com.example.amrshosny.imobuts.components.content.tickets;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.api.ApiController;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
 import com.example.amrshosny.imobuts.api.json.Ticket;
-import com.example.amrshosny.imobuts.api.json.User;
-import com.example.amrshosny.imobuts.components.content.tickets.TicketsAdapter;
+import com.example.amrshosny.imobuts.components.buyticket.BuyTicket;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ import retrofit2.Response;
 
 public class TicketsFragment extends Fragment {
     View view;
+    Button buyTicket;
     ListView mListView;
     ArrayList<Ticket> tickets;
     SharedPreferences sharedPreferences;
@@ -40,9 +42,18 @@ public class TicketsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_tickets, container, false);
+        buyTicket = view.findViewById(R.id.buy_ticket);
         mListView = (ListView) view.findViewById(R.id.tickets_listview);
         sharedPreferences = this.getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("token", null);
+
+        buyTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), BuyTicket.class);
+                startActivity(intent);
+            }
+        });
 
         getTicketsApi();
 
