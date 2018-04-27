@@ -2,7 +2,10 @@ package com.example.amrshosny.imobuts.api;
 
 import com.example.amrshosny.imobuts.api.json.Form;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
+import com.example.amrshosny.imobuts.api.json.Ticket;
 import com.example.amrshosny.imobuts.api.json.User;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -37,6 +40,10 @@ public interface ApplicationApi {
                                     @Field("username") String username,
                                     @Field("email") String email,
                                     @Field("password") String password);
+
+    @GET("tickets")
+    Call<JsonResponse<ArrayList<Ticket>>> getTickets(@Query("token") String token);
+
 
 
 }

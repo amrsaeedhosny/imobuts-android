@@ -1,60 +1,63 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/profile_bg">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:background="#db66"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:background="#db66"
                 android:orientation="vertical">
+
                 <TextView
+                    android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="username"
-                    android:gravity="center"
-                    android:textColor="#f5f5f5"
-                    android:textSize="35sp"
-                    android:textStyle="bold"
                     android:layout_margin="20dp"
-                    android:id="@+id/username"/>
+                    android:gravity="center"
+                    android:text="username"
+                    android:textColor="#fefefe"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
                 android:gravity="center">
+
                 <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:gravity="center"
+                    android:id="@+id/balance"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:layout_margin="30dp"
-                    android:text="0"
-                    android:textColor="#db66"
-                    android:textSize="30sp"
                     android:background="@drawable/rounded_textview"
                     android:fontFamily="cursive"
-                    android:textStyle="bold"
-                    android:id="@+id/balance"/>
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#000000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:orientation="vertical"
-                android:background="#db66">
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Information"
                     android:gravity="center"
-                    android:textColor="#f5f5f5"
+                    android:textColor="#222222"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_margin="10dp"/>
@@ -65,7 +68,7 @@
                     android:layout_gravity="left"
                     android:layout_marginLeft="50dp"
                     android:layout_marginTop="5dp"
-                    android:textColor="#f5f5f5"
+                    android:textColor="#222222"
                     android:textSize="15sp"
                     android:textStyle="bold"/>
                 <TextView
@@ -74,36 +77,38 @@
                     android:id="@+id/email"
                     android:layout_gravity="center"
                     android:text="example@gmail.com"
-                    android:textColor="#f5f5f5"/>
+                    android:textColor="#222222"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_margin="20dp">
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/edit_profile"
-                        android:text="Update Profile"
-                        android:textAllCaps="false"
-                        android:textSize="10sp"
-                        android:textColor="#db66"
-                        android:background="#f5f5f5"
-                        />
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/charge"
-                        android:text="Charge"
-                        android:textAllCaps="false"
-                        android:textColor="#db66"
-                        android:background="#f5f5f5"
-                        android:textSize="10sp"/>
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/edit_profile"
+            android:text="Update Profile"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:background="#AA0000"
+
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/charge"
+            android:text="Charge"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:background="#AA0000"/>
+    </LinearLayout>
 </RelativeLayout>

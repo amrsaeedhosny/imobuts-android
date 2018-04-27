@@ -1,4 +1,4 @@
-package com.example.amrshosny.imobuts.components.content;
+package com.example.amrshosny.imobuts.components.content.profile;
 
 import android.content.Context;
 import android.content.Intent;
@@ -78,5 +78,31 @@ public class ProfileFragment extends Fragment {
                 });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("auth", Context.MODE_PRIVATE);
+        token = sharedPreferences.getString("token", null);
+
+        ApiController.getApi()
+                .getProfile(token)
+                .enqueue(new Callback<JsonResponse<User>>() {
+                    @Override
+                    public void onResponse(Call<JsonResponse<User>> call, Response<JsonResponse<User>> response) {
+                        if(response.body().getSuccess()){
+                            username.setText(response.body().getResponse().getUsername());
+                            balance.setText(response.body().getResponse().getBalance().toString());
+                            email.setText(response.body().getResponse().getEmail());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonResponse<User>> call, Throwable t) {
+
+                    }
+                });
+
     }
 }
