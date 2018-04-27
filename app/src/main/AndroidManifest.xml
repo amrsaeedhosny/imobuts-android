@@ -24,7 +24,8 @@
         <activity android:name=".components.content.AccountContentActivity" />
         <activity android:name=".components.forgetpassword.ForgetPasswordActivity" />
         <activity android:name=".components.updateprofile.UpdateProfile" />
-        <activity android:name=".components.buyticket.BuyTicket"></activity>
+        <activity android:name=".components.buyticket.BuyTicket" />
+        <activity android:name=".components.ticketdetails.TicketDetails"></activity>
     </application>
 
 </manifest>

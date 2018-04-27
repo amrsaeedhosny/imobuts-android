@@ -49,7 +49,7 @@ public class TicketsAdapter extends BaseAdapter {
         TextView price = (TextView) rowView.findViewById(R.id.price);
         code.setText(mDataSource.get(i).getCode());
         date.setText(mDataSource.get(i).getDate());
-        price.setText(mDataSource.get(i).getPrice().toString());
+        price.setText(mDataSource.get(i).getPrice().toString() + " egp");
         return rowView;
     }
 }

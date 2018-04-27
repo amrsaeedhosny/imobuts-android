@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         sharedPreferences = getSharedPreferences("auth", Context.MODE_PRIVATE);
 
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
