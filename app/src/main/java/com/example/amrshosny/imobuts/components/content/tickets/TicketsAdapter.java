@@ -19,9 +19,9 @@ public class TicketsAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private ArrayList<Ticket> mDataSource;
 
-    public TicketsAdapter(Context context, ArrayList<Ticket> items) {
+    public TicketsAdapter(Context context, ArrayList<Ticket> tickets) {
         mContext = context;
-        mDataSource = items;
+        mDataSource = tickets;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -49,7 +49,7 @@ public class TicketsAdapter extends BaseAdapter {
         TextView price = (TextView) rowView.findViewById(R.id.price);
         code.setText(mDataSource.get(i).getCode());
         date.setText(mDataSource.get(i).getDate());
-        price.setText(mDataSource.get(i).getPrice().toString());
+        price.setText(mDataSource.get(i).getPrice().toString() + " egp");
         return rowView;
     }
 }

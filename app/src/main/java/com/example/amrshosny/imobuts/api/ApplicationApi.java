@@ -12,6 +12,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApplicationApi {
@@ -44,6 +45,8 @@ public interface ApplicationApi {
     @GET("tickets")
     Call<JsonResponse<ArrayList<Ticket>>> getTickets(@Query("token") String token);
 
-
+    @GET("tickets/{id}")
+    Call<JsonResponse<Ticket>> getTicketDetails(@Query("token") String token,
+                                                @Path("id") Integer id);
 
 }

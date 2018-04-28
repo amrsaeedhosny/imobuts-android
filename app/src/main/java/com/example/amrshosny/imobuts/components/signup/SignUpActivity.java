@@ -43,41 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
                if(isFormValid()){
                    signUp.setVisibility(View.GONE);
                    findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-
-                   String usernameText = String.valueOf(username.getText());
-                   String emailText = String.valueOf(email.getText());
-                   String passwordText = String.valueOf(password.getText());
-
-                   ApiController.getApi()
-                           .signUp(usernameText, emailText, passwordText)
-                           .enqueue(new Callback<JsonResponse<Form>>() {
-                       @Override
-                       public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
-                           if(response.isSuccessful()){
-                               if(response.body().getSuccess()) {
-                                   Toast.makeText(getApplicationContext(), "Your account has been created", Toast.LENGTH_LONG).show();
-                                   finish();
-                               }
-                               else {
-                                   username.setError(response.body().getResponse().getUsername());
-                                   email.setError(response.body().getResponse().getEmail());
-                                   password.setError(response.body().getResponse().getPassword());
-                               }
-                           }
-                           else {
-                               Toast.makeText(getApplicationContext(), "Some error has occurred", Toast.LENGTH_LONG).show();
-                           }
-                           findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                           signUp.setVisibility(View.VISIBLE);
-                       }
-
-                       @Override
-                       public void onFailure(Call<JsonResponse<Form>> call, Throwable t) {
-                           Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
-                           findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                           signUp.setVisibility(View.VISIBLE);
-                       }
-                   });
+                   signUpApi();
                }
             }
         });
@@ -170,5 +136,37 @@ public class SignUpActivity extends AppCompatActivity {
         return true;
     }
 
+    void signUpApi(){
+        ApiController.getApi()
+                .signUp(username.getText().toString(), email.getText().toString(), password.getText().toString())
+                .enqueue(new Callback<JsonResponse<Form>>() {
+                    @Override
+                    public void onResponse(Call<JsonResponse<Form>> call, Response<JsonResponse<Form>> response) {
+                        if(response.isSuccessful()){
+                            if(response.body().getSuccess()) {
+                                Toast.makeText(getApplicationContext(), "Your account has been created", Toast.LENGTH_LONG).show();
+                                finish();
+                            }
+                            else {
+                                username.setError(response.body().getResponse().getUsername());
+                                email.setError(response.body().getResponse().getEmail());
+                                password.setError(response.body().getResponse().getPassword());
+                            }
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Some error has occurred", Toast.LENGTH_LONG).show();
+                        }
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        signUp.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonResponse<Form>> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show();
+                        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                        signUp.setVisibility(View.VISIBLE);
+                    }
+                });
+    }
 
 }
