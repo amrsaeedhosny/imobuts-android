@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.amrshosny.imobuts.R;
@@ -48,9 +49,13 @@ public class TicketsAdapter extends BaseAdapter {
         TextView code = (TextView) rowView.findViewById(R.id.code);
         TextView date = (TextView) rowView.findViewById(R.id.date);
         TextView price = (TextView) rowView.findViewById(R.id.price);
+        ImageView newTicket = (ImageView) rowView.findViewById(R.id.new_ticket);
         code.setText(mDataSource.get(i).getCode());
         date.setText(mDataSource.get(i).getDate());
-        price.setText(mDataSource.get(i).getPrice().toString() + " egp");
+        price.setText(mDataSource.get(i).getPrice().toString() + " Egp");
+        if(!mDataSource.get(i).getViewed()){
+            newTicket.setVisibility(View.VISIBLE);
+        }
         return rowView;
     }
 }

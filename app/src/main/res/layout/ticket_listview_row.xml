@@ -1,45 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="#e0e0e0"
-    android:padding="10dp">
-    <ImageView
-        android:layout_height="75dp"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:src="@drawable/ticket_listview">
-    </ImageView>
+    android:layout_height="wrap_content">
     <LinearLayout
-        android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:layout_weight="3"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/code"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#e0e0e0"
+        android:padding="10dp">
+        <ImageView
+            android:layout_height="75dp"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="992 185 667 443 223"
-            android:gravity="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"/>
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="21/1/2018 at 12:00 PM"
-            android:gravity="center" />
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="1.00 egp"
-            android:gravity="center" />
+            android:src="@drawable/ticket_listview">
+        </ImageView>
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/code"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="992 185 667 443 223"
+                android:gravity="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"/>
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="21/1/2018 at 12:00 PM"
+                android:gravity="center" />
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="1.00 egp"
+                android:gravity="center" />
 
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 
+    <ImageView
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:layout_margin="5dp"
+        android:id="@+id/new_ticket"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/new_ticket"
+        android:visibility="gone"/>
+</RelativeLayout>

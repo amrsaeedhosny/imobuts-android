@@ -80,7 +80,7 @@ public class TicketsFragment extends Fragment {
                 TextView date = (TextView) ticketDetails.findViewById(R.id.date);
                 date.setText(ticket.getDate());
                 TextView price = (TextView) ticketDetails.findViewById(R.id.price);
-                price.setText(ticket.getPrice().toString() + " egp");
+                price.setText(ticket.getPrice().toString() + " Egp");
                 ticketDetails.show();
             }
         });
@@ -88,6 +88,12 @@ public class TicketsFragment extends Fragment {
         getTicketsApi();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getTicketsApi();
     }
 
     void getTicketsApi(){

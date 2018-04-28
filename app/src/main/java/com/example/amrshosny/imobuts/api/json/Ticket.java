@@ -15,17 +15,21 @@ public class Ticket {
     private String date;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private Double price;
+    @SerializedName("viewed")
+    @Expose
+    private Boolean viewed;
 
     public Ticket(){
 
     }
 
-    public Ticket(Integer id, String code, String date, Integer price) {
+    public Ticket(Integer id, String code, String date, Double price, Boolean viewed) {
         this.id = id;
         this.code = code;
         this.date = date;
         this.price = price;
+        this.viewed = viewed;
     }
 
     public Integer getId() {
@@ -52,12 +56,19 @@ public class Ticket {
         this.date = date;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
+    public Boolean getViewed() {
+        return viewed;
+    }
+
+    public void setViewed(Boolean viewed) {
+        this.viewed = viewed;
+    }
 }
