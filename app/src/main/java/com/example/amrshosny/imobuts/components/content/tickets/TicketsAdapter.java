@@ -11,15 +11,16 @@ import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.api.json.Ticket;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class TicketsAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<Ticket> mDataSource;
+    private List<Ticket> mDataSource;
 
-    public TicketsAdapter(Context context, ArrayList<Ticket> tickets) {
+    public TicketsAdapter(Context context, List<Ticket> tickets) {
         mContext = context;
         mDataSource = tickets;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

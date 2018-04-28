@@ -4,6 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +19,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -24,8 +27,9 @@
         <activity android:name=".components.content.AccountContentActivity" />
         <activity android:name=".components.forgetpassword.ForgetPasswordActivity" />
         <activity android:name=".components.updateprofile.UpdateProfile" />
-        <activity android:name=".components.buyticket.BuyTicket" />
-        <activity android:name=".components.ticketdetails.TicketDetails"></activity>
+        <activity android:name=".components.buyticket.BuyTicket">
+
+        </activity>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.example.amrshosny.imobuts.api;
 import com.example.amrshosny.imobuts.api.json.Form;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
 import com.example.amrshosny.imobuts.api.json.Ticket;
+import com.example.amrshosny.imobuts.api.json.Tickets;
 import com.example.amrshosny.imobuts.api.json.User;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public interface ApplicationApi {
                                     @Field("password") String password);
 
     @GET("tickets")
-    Call<JsonResponse<ArrayList<Ticket>>> getTickets(@Query("token") String token);
+    Call<JsonResponse<Tickets>> getTickets(@Query("token") String token);
 
     @GET("tickets/{id}")
     Call<JsonResponse<Ticket>> getTicketDetails(@Query("token") String token,

@@ -21,9 +21,11 @@ import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.api.ApiController;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
 import com.example.amrshosny.imobuts.api.json.Ticket;
+import com.example.amrshosny.imobuts.api.json.Tickets;
 import com.example.amrshosny.imobuts.components.buyticket.BuyTicket;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,7 +35,7 @@ public class TicketsFragment extends Fragment {
     View view;
     Button buyTicket;
     ListView mListView;
-    ArrayList<Ticket> tickets;
+    List<Ticket> tickets;
     Ticket ticket;
     SharedPreferences sharedPreferences;
     String token;
@@ -91,18 +93,18 @@ public class TicketsFragment extends Fragment {
     void getTicketsApi(){
         ApiController.getApi()
                 .getTickets(token)
-                .enqueue(new Callback<JsonResponse<ArrayList<Ticket>>>() {
+                .enqueue(new Callback<JsonResponse<Tickets>>() {
                     @Override
-                    public void onResponse(Call<JsonResponse<ArrayList<Ticket>>> call, Response<JsonResponse<ArrayList<Ticket>>> response) {
+                    public void onResponse(Call<JsonResponse<Tickets>> call, Response<JsonResponse<Tickets>> response) {
                         if(response.body().getSuccess()){
-                            tickets = response.body().getResponse();
+                            tickets = response.body().getResponse().getTickets();
                             TicketsAdapter adapter = new TicketsAdapter(getActivity(), tickets);
                             mListView.setAdapter(adapter);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<JsonResponse<ArrayList<Ticket>>> call, Throwable t) {
+                    public void onFailure(Call<JsonResponse<Tickets>> call, Throwable t) {
 
                     }
                 });
