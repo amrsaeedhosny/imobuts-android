@@ -70,22 +70,15 @@ public class TicketsFragment extends Fragment {
             }
         });
 
+        getTicketsApi();
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 getTicketDetailsApi(tickets.get(i).getId());
-                TextView code = (TextView) ticketDetails.findViewById(R.id.code);
-                code.setText(ticket.getCode());
-                TextView date = (TextView) ticketDetails.findViewById(R.id.date);
-                date.setText(ticket.getDate());
-                TextView price = (TextView) ticketDetails.findViewById(R.id.price);
-                price.setText(ticket.getPrice().toString() + " Egp");
-                ticketDetails.show();
             }
         });
-
-        getTicketsApi();
 
         return view;
     }
@@ -119,12 +112,19 @@ public class TicketsFragment extends Fragment {
     void getTicketDetailsApi(Integer id){
         ticket = new Ticket();
         ApiController.getApi()
-                .getTicketDetails(token, id)
+                .getTicketDetails(id, token)
                 .enqueue(new Callback<JsonResponse<Ticket>>() {
                     @Override
                     public void onResponse(Call<JsonResponse<Ticket>> call, Response<JsonResponse<Ticket>> response) {
-                        if(response.body().getSuccess()){
+                        if (response.body().getSuccess()) {
                             ticket = response.body().getResponse();
+                            TextView code = (TextView) ticketDetails.findViewById(R.id.code);
+                            code.setText(ticket.getCode());
+                            TextView date = (TextView) ticketDetails.findViewById(R.id.date);
+                            date.setText(ticket.getDate());
+                            TextView price = (TextView) ticketDetails.findViewById(R.id.price);
+                            price.setText(String.valueOf(ticket.getPrice()) + " Egp");
+                            ticketDetails.show();
                         }
                     }
 
