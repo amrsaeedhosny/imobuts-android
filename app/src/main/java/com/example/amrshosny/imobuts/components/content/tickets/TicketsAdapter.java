@@ -52,7 +52,7 @@ public class TicketsAdapter extends BaseAdapter {
         ImageView newTicket = (ImageView) rowView.findViewById(R.id.new_ticket);
         code.setText(mDataSource.get(i).getCode());
         date.setText(mDataSource.get(i).getDate());
-        price.setText(mDataSource.get(i).getPrice().toString() + " Egp");
+        price.setText(String.valueOf(mDataSource.get(i).getPrice()) + " Egp");
         if(!mDataSource.get(i).getViewed()){
             newTicket.setVisibility(View.VISIBLE);
         }

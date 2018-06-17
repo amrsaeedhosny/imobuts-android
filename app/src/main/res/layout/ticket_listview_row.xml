@@ -49,7 +49,6 @@
     <ImageView
         android:layout_height="30dp"
         android:layout_width="30dp"
-        android:layout_margin="5dp"
         android:id="@+id/new_ticket"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"

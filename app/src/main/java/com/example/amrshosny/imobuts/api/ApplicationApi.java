@@ -17,7 +17,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApplicationApi {
-    String BASE_URL = "https://smartbussystem.000webhostapp.com/api/";
+    String BASE_URL = "https://imobuts.herokuapp.com/api/";
 
     @FormUrlEncoded
     @POST("signUp")
@@ -46,8 +46,8 @@ public interface ApplicationApi {
     @GET("tickets")
     Call<JsonResponse<Tickets>> getTickets(@Query("token") String token);
 
-    @GET("tickets/{id}")
-    Call<JsonResponse<Ticket>> getTicketDetails(@Query("token") String token,
-                                                @Path("id") Integer id);
+    @GET("ticketDetails")
+    Call<JsonResponse<Ticket>> getTicketDetails(@Query("id") Integer id,
+                                                @Query("token") String token);
 
 }
