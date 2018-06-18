@@ -5,21 +5,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.api.json.Ticket;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class TicketsAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<Ticket> mDataSource;
+    private List<Ticket> mDataSource;
 
-    public TicketsAdapter(Context context, ArrayList<Ticket> tickets) {
+    public TicketsAdapter(Context context, List<Ticket> tickets) {
         mContext = context;
         mDataSource = tickets;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -47,9 +49,13 @@ public class TicketsAdapter extends BaseAdapter {
         TextView code = (TextView) rowView.findViewById(R.id.code);
         TextView date = (TextView) rowView.findViewById(R.id.date);
         TextView price = (TextView) rowView.findViewById(R.id.price);
+        ImageView newTicket = (ImageView) rowView.findViewById(R.id.new_ticket);
         code.setText(mDataSource.get(i).getCode());
         date.setText(mDataSource.get(i).getDate());
-        price.setText(mDataSource.get(i).getPrice().toString() + " egp");
+        price.setText(String.valueOf(mDataSource.get(i).getPrice()) + " Egp");
+        if(!mDataSource.get(i).getViewed()){
+            newTicket.setVisibility(View.VISIBLE);
+        }
         return rowView;
     }
 }

@@ -15,6 +15,7 @@ import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.api.ApiController;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
 import com.example.amrshosny.imobuts.api.json.User;
+import com.example.amrshosny.imobuts.components.charge.Charge;
 import com.example.amrshosny.imobuts.components.signin.SignInActivity;
 import com.example.amrshosny.imobuts.components.updateprofile.UpdateProfile;
 
@@ -72,6 +73,14 @@ public class ProfileFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), SignInActivity.class);
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+
+        charge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Charge.class);
+                startActivity(intent);
             }
         });
 

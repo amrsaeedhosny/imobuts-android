@@ -3,6 +3,7 @@ package com.example.amrshosny.imobuts.api;
 import com.example.amrshosny.imobuts.api.json.Form;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
 import com.example.amrshosny.imobuts.api.json.Ticket;
+import com.example.amrshosny.imobuts.api.json.Tickets;
 import com.example.amrshosny.imobuts.api.json.User;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApplicationApi {
-    String BASE_URL = "https://smartbussystem.000webhostapp.com/api/";
+    String BASE_URL = "https://imobuts.herokuapp.com/api/";
 
     @FormUrlEncoded
     @POST("signUp")
@@ -43,10 +44,12 @@ public interface ApplicationApi {
                                     @Field("password") String password);
 
     @GET("tickets")
-    Call<JsonResponse<ArrayList<Ticket>>> getTickets(@Query("token") String token);
+    Call<JsonResponse<Tickets>> getTickets(@Query("token") String token);
 
-    @GET("tickets/{id}")
-    Call<JsonResponse<Ticket>> getTicketDetails(@Query("token") String token,
-                                                @Path("id") Integer id);
+    @GET("ticketDetails")
+    Call<JsonResponse<Ticket>> getTicketDetails(@Query("id") Integer id,
+                                                @Query("token") String token);
+
+
 
 }

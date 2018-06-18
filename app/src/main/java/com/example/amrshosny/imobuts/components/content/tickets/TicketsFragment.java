@@ -21,9 +21,11 @@ import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.api.ApiController;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
 import com.example.amrshosny.imobuts.api.json.Ticket;
+import com.example.amrshosny.imobuts.api.json.Tickets;
 import com.example.amrshosny.imobuts.components.buyticket.BuyTicket;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,7 +35,7 @@ public class TicketsFragment extends Fragment {
     View view;
     Button buyTicket;
     ListView mListView;
-    ArrayList<Ticket> tickets;
+    List<Ticket> tickets;
     Ticket ticket;
     SharedPreferences sharedPreferences;
     String token;
@@ -68,41 +70,40 @@ public class TicketsFragment extends Fragment {
             }
         });
 
+        getTicketsApi();
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 getTicketDetailsApi(tickets.get(i).getId());
-                TextView code = (TextView) ticketDetails.findViewById(R.id.code);
-                code.setText(ticket.getCode());
-                TextView date = (TextView) ticketDetails.findViewById(R.id.date);
-                date.setText(ticket.getDate());
-                TextView price = (TextView) ticketDetails.findViewById(R.id.price);
-                price.setText(ticket.getPrice().toString() + " egp");
-                ticketDetails.show();
             }
         });
 
-        getTicketsApi();
-
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getTicketsApi();
     }
 
     void getTicketsApi(){
         ApiController.getApi()
                 .getTickets(token)
-                .enqueue(new Callback<JsonResponse<ArrayList<Ticket>>>() {
+                .enqueue(new Callback<JsonResponse<Tickets>>() {
                     @Override
-                    public void onResponse(Call<JsonResponse<ArrayList<Ticket>>> call, Response<JsonResponse<ArrayList<Ticket>>> response) {
+                    public void onResponse(Call<JsonResponse<Tickets>> call, Response<JsonResponse<Tickets>> response) {
                         if(response.body().getSuccess()){
-                            tickets = response.body().getResponse();
+                            tickets = response.body().getResponse().getTickets();
                             TicketsAdapter adapter = new TicketsAdapter(getActivity(), tickets);
                             mListView.setAdapter(adapter);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<JsonResponse<ArrayList<Ticket>>> call, Throwable t) {
+                    public void onFailure(Call<JsonResponse<Tickets>> call, Throwable t) {
 
                     }
                 });
@@ -111,12 +112,19 @@ public class TicketsFragment extends Fragment {
     void getTicketDetailsApi(Integer id){
         ticket = new Ticket();
         ApiController.getApi()
-                .getTicketDetails(token, id)
+                .getTicketDetails(id, token)
                 .enqueue(new Callback<JsonResponse<Ticket>>() {
                     @Override
                     public void onResponse(Call<JsonResponse<Ticket>> call, Response<JsonResponse<Ticket>> response) {
-                        if(response.body().getSuccess()){
+                        if (response.body().getSuccess()) {
                             ticket = response.body().getResponse();
+                            TextView code = (TextView) ticketDetails.findViewById(R.id.code);
+                            code.setText(ticket.getCode());
+                            TextView date = (TextView) ticketDetails.findViewById(R.id.date);
+                            date.setText(ticket.getDate());
+                            TextView price = (TextView) ticketDetails.findViewById(R.id.price);
+                            price.setText(String.valueOf(ticket.getPrice()) + " Egp");
+                            ticketDetails.show();
                         }
                     }
 
