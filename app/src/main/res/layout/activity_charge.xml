@@ -23,7 +23,7 @@
             android:textStyle="bold"
             android:gravity="center"/>
         <EditText
-            android:id="@+id/balance"
+            android:id="@+id/amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter charge amount"
@@ -31,10 +31,10 @@
             android:background="#fffffe"
             android:layout_margin="5dp"/>
         <Button
-            android:id="@+id/charge"
+            android:id="@+id/confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Charge"
+            android:text="Confirm"
             android:background="#AA0000"
             android:textColor="#E0E0E0"
             android:textAllCaps="false"
@@ -51,5 +51,4 @@
                 android:indeterminate="true" />
         </RelativeLayout>
     </LinearLayout>
-
 </RelativeLayout>

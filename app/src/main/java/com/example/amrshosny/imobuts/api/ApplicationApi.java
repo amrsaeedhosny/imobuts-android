@@ -50,4 +50,6 @@ public interface ApplicationApi {
     Call<JsonResponse<Ticket>> getTicketDetails(@Query("id") Integer id,
                                                 @Query("token") String token);
 
+
+
 }
