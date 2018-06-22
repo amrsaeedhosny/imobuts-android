@@ -12,12 +12,12 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:src="@drawable/bus"
+            android:src="@drawable/ticket"
             android:gravity="center"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="imobuts"
+            android:text="Komsary"
             android:textSize="35dp"
             android:textColor="#AA0000"
             android:textStyle="bold"

@@ -105,6 +105,10 @@ public class ProfileFragment extends Fragment {
                             username.setText(response.body().getResponse().getUsername());
                             balance.setText(response.body().getResponse().getBalance().toString());
                             email.setText(response.body().getResponse().getEmail());
+
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("balance", response.body().getResponse().getBalance().toString());
+                            editor.commit();
                         }
                     }
 
