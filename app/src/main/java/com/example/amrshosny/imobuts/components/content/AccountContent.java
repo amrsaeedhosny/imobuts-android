@@ -9,7 +9,7 @@ import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.components.content.profile.ProfileFragment;
 import com.example.amrshosny.imobuts.components.content.tickets.TicketsFragment;
 
-public class AccountContentActivity extends AppCompatActivity {
+public class AccountContent extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter adapter;

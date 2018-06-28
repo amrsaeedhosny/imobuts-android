@@ -11,19 +11,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.amrshosny.imobuts.components.content.AccountContentActivity;
-import com.example.amrshosny.imobuts.components.forgetpassword.ForgetPasswordActivity;
+import com.example.amrshosny.imobuts.components.content.AccountContent;
+import com.example.amrshosny.imobuts.components.forgetpassword.ForgetPassword;
 import com.example.amrshosny.imobuts.R;
 import com.example.amrshosny.imobuts.api.ApiController;
 import com.example.amrshosny.imobuts.api.json.Form;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
-import com.example.amrshosny.imobuts.components.signup.SignUpActivity;
+import com.example.amrshosny.imobuts.components.signup.SignUp;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignInActivity extends AppCompatActivity {
+public class SignIn extends AppCompatActivity {
     EditText username;
     EditText password;
     Button signIn;
@@ -57,7 +57,7 @@ public class SignInActivity extends AppCompatActivity {
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(SignIn.this, SignUp.class);
                 startActivity(intent);
             }
         });
@@ -65,7 +65,7 @@ public class SignInActivity extends AppCompatActivity {
         forgetPassword.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignInActivity.this, ForgetPasswordActivity.class);
+                Intent intent = new Intent(SignIn.this, ForgetPassword.class);
                 startActivity(intent);
             }
         });
@@ -117,7 +117,7 @@ public class SignInActivity extends AppCompatActivity {
                                 editor.putString("token", response.body().getToken());
                                 editor.commit();
 
-                                Intent intent = new Intent(SignInActivity.this, AccountContentActivity.class);
+                                Intent intent = new Intent(SignIn.this, AccountContent.class);
                                 startActivity(intent);
                                 finish();
                             }
