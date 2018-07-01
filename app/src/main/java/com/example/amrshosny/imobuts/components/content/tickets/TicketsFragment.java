@@ -40,7 +40,7 @@ public class TicketsFragment extends Fragment {
     SharedPreferences sharedPreferences;
     String token;
     Dialog ticketDetails;
-
+    
     public TicketsFragment() {
         tickets = new ArrayList<Ticket>();
     }

@@ -7,8 +7,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.amrshosny.imobuts.components.content.AccountContentActivity;
-import com.example.amrshosny.imobuts.components.signin.SignInActivity;
+import com.example.amrshosny.imobuts.components.content.AccountContent;
+import com.example.amrshosny.imobuts.components.signin.SignIn;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 Intent intent;
                 if(sharedPreferences.contains("token")){
-                    intent = new Intent(MainActivity.this, AccountContentActivity.class);
+                    intent = new Intent(MainActivity.this, AccountContent.class);
                 }
                 else {
-                    intent = new Intent(MainActivity.this, SignInActivity.class);
+                    intent = new Intent(MainActivity.this, SignIn.class);
                 }
                 startActivity(intent);
                 finish();

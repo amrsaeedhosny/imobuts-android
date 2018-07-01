@@ -16,7 +16,7 @@ import com.example.amrshosny.imobuts.api.ApiController;
 import com.example.amrshosny.imobuts.api.json.JsonResponse;
 import com.example.amrshosny.imobuts.api.json.User;
 import com.example.amrshosny.imobuts.components.charge.Charge;
-import com.example.amrshosny.imobuts.components.signin.SignInActivity;
+import com.example.amrshosny.imobuts.components.signin.SignIn;
 import com.example.amrshosny.imobuts.components.updateprofile.UpdateProfile;
 
 import retrofit2.Call;
@@ -70,7 +70,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 sharedPreferences.edit().remove("token").commit();
-                Intent intent = new Intent(getActivity(), SignInActivity.class);
+                Intent intent = new Intent(getActivity(), SignIn.class);
                 startActivity(intent);
                 getActivity().finish();
             }
@@ -105,6 +105,10 @@ public class ProfileFragment extends Fragment {
                             username.setText(response.body().getResponse().getUsername());
                             balance.setText(response.body().getResponse().getBalance().toString());
                             email.setText(response.body().getResponse().getEmail());
+
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("balance", response.body().getResponse().getBalance().toString());
+                            editor.commit();
                         }
                     }
 
